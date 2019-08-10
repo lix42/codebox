@@ -7,26 +7,28 @@ import { StaticRouterContext } from "react-router";
 import { StaticRouter } from "react-router-dom";
 import App from "./App";
 
-// tslint:disable-next-line:no-var-requires
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const assets = require(process.env.RAZZLE_ASSETS_MANIFEST || "");
 
 const server = express();
 server
   .disable("x-powered-by")
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .get("/*", (req, res) => {
-    const context: StaticRouterContext = {};
-    const markup = renderToString(
-      <StaticRouter context={context} location={req.url}>
-        <App />
-      </StaticRouter>
-    );
+  .use(express.static(process.env.RAZZLE_PUBLIC_DIR || "./"))
+  .get(
+    "/*",
+    (req, res): void => {
+      const context: StaticRouterContext = {};
+      const markup = renderToString(
+        <StaticRouter context={context} location={req.url}>
+          <App />
+        </StaticRouter>
+      );
 
-    if (context.url) {
-      res.redirect(context.url);
-    } else {
-      res.status(200).send(
-        `<!doctype html>
+      if (context.url) {
+        res.redirect(context.url);
+      } else {
+        res.status(200).send(
+          `<!doctype html>
     <html lang="">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,8 +50,9 @@ server
         <div id="root">${markup}</div>
     </body>
 </html>`
-      );
+        );
+      }
     }
-  });
+  );
 
 export default server;

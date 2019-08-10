@@ -10,7 +10,6 @@ module.exports = {
     "plugin:node/recommended",
     "plugin:promise/recommended",
     "plugin:import/recommended",
-    "plugin:lodash/recommended",
     "plugin:ramda/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
@@ -28,7 +27,7 @@ module.exports = {
   parserOptions: {
     project: path.resolve(__dirname, "./tsconfig.json"),
     tsconfigRootDir: __dirname,
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
     ecmaFeatures: {
       jsx: true,
     },
@@ -42,7 +41,6 @@ module.exports = {
     "@typescript-eslint",
     "jsx-a11y",
     "react-hooks",
-    "lodash",
     "ramda",
     "prettier",
   ],
@@ -51,5 +49,28 @@ module.exports = {
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-require": [
+      "error",
+      {
+        tryExtensions: [".js", ".json", ".node", ".ts", ".tsx"],
+      },
+    ],
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
+        accessibility: "no-public",
+      },
+    ],
+  },
+  settings: {
+    react: { version: "detect" },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      typescript: {},
+    },
   },
 };

@@ -1,10 +1,9 @@
 /** @format */
-// tslint:disable:no-console
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import http from "http";
 
-// tslint:disable-next-line:no-var-requires
-let app = require("./server").default;
+let app = require("./server.tsx").default;
 
 const server = http.createServer(app);
 
@@ -12,7 +11,7 @@ let currentApp = app;
 
 server.listen(
   (process.env.PORT || 3000) as number,
-  ((error: Error) => {
+  ((error: Error): void => {
     if (error) {
       console.log(error);
     }
@@ -24,16 +23,19 @@ server.listen(
 if (module.hot) {
   console.log("✅  Server-side HMR Enabled!");
 
-  module.hot.accept("./server", () => {
-    console.log("🔁  HMR Reloading `./server`...");
+  module.hot.accept(
+    "./server",
+    (): void => {
+      console.log("🔁  HMR Reloading `./server`...");
 
-    try {
-      app = require("./server").default;
-      server.removeListener("request", currentApp);
-      server.on("request", app);
-      currentApp = app;
-    } catch (error) {
-      console.error(error);
+      try {
+        app = require("./server").default;
+        server.removeListener("request", currentApp);
+        server.on("request", app);
+        currentApp = app;
+      } catch (error) {
+        console.error(error);
+      }
     }
-  });
+  );
 }

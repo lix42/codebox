@@ -5,7 +5,7 @@ import "./Home.css";
 import logo from "./react.svg";
 
 class Home extends React.Component {
-  render() {
+  render(): JSX.Element {
     return (
       <div className="Home">
         <div className="Home-header">
