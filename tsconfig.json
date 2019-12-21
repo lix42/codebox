@@ -2,10 +2,11 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "checkJs": true,
     "declaration": true,
     "esModuleInterop": true,
+    "importHelpers": true,
     "experimentalDecorators": true,
     "jsx": "react",
     "lib": ["esnext", "dom", "webworker"],

@@ -6,10 +6,9 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:react/recommended",
+    "react-app",
     "plugin:node/recommended",
     "plugin:promise/recommended",
-    "plugin:import/recommended",
     "plugin:ramda/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
@@ -34,7 +33,6 @@ module.exports = {
     sourceType: "module", // Allows for the use of imports
   },
   plugins: [
-    "import",
     "react",
     "node",
     "promise",
@@ -50,10 +48,22 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-import": [
+      "error",
+      {
+        tryExtensions: [".js", ".json", ".node", ".ts", ".tsx"],
+      },
+    ],
     "node/no-missing-require": [
       "error",
       {
         tryExtensions: [".js", ".json", ".node", ".ts", ".tsx"],
+      },
+    ],
+    "node/no-extraneous-import": [
+      "error",
+      {
+        allowModules: ["react-router"],
       },
     ],
     "@typescript-eslint/explicit-member-accessibility": [
@@ -65,12 +75,5 @@ module.exports = {
   },
   settings: {
     react: { version: "detect" },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
-    },
-    "import/resolver": {
-      // use <root>/tsconfig.json
-      typescript: {},
-    },
   },
 };
