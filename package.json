@@ -14,7 +14,7 @@
     "check": "npm run lint && jest && npm run build"
   },
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.17.3",
     "razzle": "3.0.0",
     "razzle-plugin-typescript": "^3.0.0",
     "react": "16.12.0",
